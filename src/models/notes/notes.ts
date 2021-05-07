@@ -9,6 +9,14 @@ const noteSchema = new Schema({
     noteBy: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    isDone: {
+        type: Boolean,
+        default: false
+    },
+    isSecret: {
+        type: Boolean,
+        default: false
     }
 })
 

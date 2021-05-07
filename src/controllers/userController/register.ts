@@ -41,6 +41,8 @@ export const registerUser: RequestHandler = async (req, res, next) => {
             return next(createError(400, 'Email already exist.'))
         }
 
+        next(createError(400, err))
+
     }
 
 }

@@ -33,7 +33,7 @@ export const loginUser: RequestHandler = async (req, res, next) => {
         })
 
     } catch (err) {
-        next(createError(400, 'Something happened.'))
+        next(createError(400, err))
     }
 
 }

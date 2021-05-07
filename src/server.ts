@@ -11,6 +11,11 @@ const PORT = process.env.PORT || 8000
 // Routes
 import RegisterRoute from './routes/user/register'
 import LoginRoute from './routes/user/login'
+import CreateNoteRoute from './routes/note/createNote'
+import EditNoteRoute from './routes/note/editNote'
+import ToggleDoneNoteRoute from './routes/note/toggleDoneNote'
+import DeleteNoteRoute from './routes/note/deleteNote'
+import UserInfoRoute from './routes/user/userInfo'
 
 connect(`mongodb+srv://TmAdmin:${process.env.MONGO_PASSWORD}@cluster0.c7khy.mongodb.net/TS-Lorem-Notes-DB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
@@ -21,7 +26,11 @@ app.use(express.urlencoded({extended: true}))
 
 app.use(RegisterRoute)
 app.use(LoginRoute)
-
+app.use(CreateNoteRoute)
+app.use(EditNoteRoute)
+app.use(ToggleDoneNoteRoute)
+app.use(DeleteNoteRoute)
+app.use(UserInfoRoute)
 
 app.use<RequestHandler>((req, res, next) => {
     next(createError(404, 'Route not found.'))
