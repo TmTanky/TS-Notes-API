@@ -30,7 +30,6 @@ export const registerUser: RequestHandler = async (req, res, next) => {
         const token = sign({id: newUser._id}, process.env.JWT_KEY as string)
 
         return res.status(200).json({
-            msg: 'Successfully Registered.',
             data: newUser,
             token
         })
@@ -38,7 +37,7 @@ export const registerUser: RequestHandler = async (req, res, next) => {
     } catch (err) {
 
         if (err.code === 11000) {
-            return next(createError(400, 'Email already exist.'))
+            return next(createError(400, 'Email/Username already exist.'))
         }
 
         next(createError(400, err))

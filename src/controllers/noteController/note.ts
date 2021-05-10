@@ -9,7 +9,8 @@ import {User} from '../../models/users/user'
 export const createNote: RequestHandler = async (req, res, next) => {
 
     const {userID} = req.params as {userID: string}
-    const {title, content, isSecret} = req.body as {title: string, content: string, isSecret: boolean}
+    const {isSecret} = req.body as {isSecret: boolean}
+    const {title, content} = req.body.note as {title: string, content: string}
 
     try {
 

@@ -9,4 +9,5 @@ export interface Iuser extends Document {
     email: string
     password: string
     myNotes: Inote[]
+    pincode: string
 }

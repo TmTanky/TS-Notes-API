@@ -16,7 +16,8 @@ const userSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Note'
         }
-    ]
+    ],
+    pincode: String
 })
 
 export const User = model<Iuser>('User', userSchema)

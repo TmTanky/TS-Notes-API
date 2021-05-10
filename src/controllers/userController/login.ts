@@ -26,8 +26,7 @@ export const loginUser: RequestHandler = async (req, res, next) => {
 
         const token = sign({id: foundUser._id}, process.env.JWT_KEY as string)
         
-        return res.status(400).json({
-            msg: 'Login Successfully.',
+        return res.status(200).json({
             data: foundUser,
             token
         })

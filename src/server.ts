@@ -15,7 +15,7 @@ import CreateNoteRoute from './routes/note/createNote'
 import EditNoteRoute from './routes/note/editNote'
 import ToggleDoneNoteRoute from './routes/note/toggleDoneNote'
 import DeleteNoteRoute from './routes/note/deleteNote'
-import UserInfoRoute from './routes/user/userInfo'
+import UserInfoRoute from './routes/user/usersNotes'
 
 connect(`mongodb+srv://TmAdmin:${process.env.MONGO_PASSWORD}@cluster0.c7khy.mongodb.net/TS-Lorem-Notes-DB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
@@ -37,10 +37,8 @@ app.use<RequestHandler>((req, res, next) => {
 })
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    return res.status(500 || res.status).json({
-        status: res.status,
-        msg: err.message,
-        err
+    return res.json({
+        msg: err.message
     })
 })
 
