@@ -35,8 +35,8 @@ export const getUserSecretNotes: RequestHandler = async (req, res, next) => {
         const usersNotes = user?.myNotes.filter(item => item.isSecret === true).map(item => {
             return ({
                 _id: item._id,
-                title: Buffer.from(item.title, 'base64').toString('utf-8'),
-                content: Buffer.from(item.content, 'base64').toString('utf-8'),
+                title: Buffer.from(item.title, process.env.ENCODE_2 as BufferEncoding).toString(process.env.ENCODE_1 as BufferEncoding),
+                content: Buffer.from(item.content, process.env.ENCODE_2 as BufferEncoding).toString(process.env.ENCODE_1 as BufferEncoding),
                 isDone: item.isDone,
                 isSecret: item.isSecret,
                 noteBy: item.noteBy

@@ -16,12 +16,12 @@ export const createNote: RequestHandler = async (req, res, next) => {
 
         if (isSecret) {
             
-            const buffTitle = Buffer.from(title, 'utf-8')
-            const buffContent = Buffer.from(content, 'utf-8')
+            const buffTitle = Buffer.from(title, process.env.ENCODE_1 as BufferEncoding)
+            const buffContent = Buffer.from(content, process.env.ENCODE_1 as BufferEncoding)
             
             const secretNote = new Note({
-                title: buffTitle.toString('base64'),
-                content: buffContent.toString('base64'),
+                title: buffTitle.toString(process.env.ENCODE_2 as BufferEncoding),
+                content: buffContent.toString(process.env.ENCODE_2 as BufferEncoding),
                 noteBy: userID,
                 isSecret
             })
@@ -75,6 +75,26 @@ export const editNote: RequestHandler = async (req, res, next) => {
     const {title, content} = req.body as {title: string, content: string}
 
     try {
+
+        const ifSecret = await Note.findOne({_id: noteID})
+
+        if (ifSecret?.isSecret) {
+
+            const buffTitle = Buffer.from(title, process.env.ENCODE_1 as BufferEncoding)
+            const buffContent = Buffer.from(content, process.env.ENCODE_1 as BufferEncoding)
+
+            const editedNote = await Note.findOneAndUpdate({_id: noteID},{
+                title: buffTitle.toString(process.env.ENCODE_2 as BufferEncoding),
+                content: buffContent.toString(process.env.ENCODE_2 as BufferEncoding)
+            }, {new: true})
+    
+            return res.status(200).json({
+                status: res.status,
+                msg: 'Noted edited.',
+                data: editedNote
+            })
+
+        }
 
         const editedNote = await Note.findOneAndUpdate({_id: noteID},{
             title,

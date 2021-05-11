@@ -4,6 +4,9 @@ const router = Router()
 // Controllers
 import {deleteNote} from '../../controllers/noteController/note'
 
-router.delete('/deletenote/:userID/:noteID', deleteNote)
+// Auth
+import { authJWT } from '../../auth/auth'
+
+router.delete('/deletenote/:userID/:noteID',authJWT, deleteNote)
 
 export default router
